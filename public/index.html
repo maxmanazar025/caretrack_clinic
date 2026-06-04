@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <script>
+    (function () {
+      var stored = localStorage.getItem('caretrack_theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareTrack Clinic — Tibbiy Yozuvlarni Boshqarish Tizimi (TYBT)</title>
+  <meta name="description" content="MediCore Solutions tomonidan xususiy klinikalar uchun loyihalangan to'liq himoyalangan, zamonaviy va tezkor Tibbiy Yozuvlarni Boshqarish Tizimi.">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+  <!-- ROOT SPA Container -->
+  <div id="app">
+    <!-- Content will be injected here via app.js -->
+  </div>
+
+  <!-- Global Modal Overlays for CRUD actions -->
+  
+  <!-- 1. Doctor Modal -->
+  <div id="doctor-modal" class="modal-overlay">
+    <div class="modal-content glass-panel">
+      <div class="panel-header">
+        <h3 id="doctor-modal-title" data-trans="modal_add_doctor">Yangi shifokor yaratish</h3>
+        <button class="btn-icon" onclick="closeModal('doctor-modal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="doctor-form" onsubmit="handleDoctorSubmit(event)">
+        <input type="hidden" id="doctor-id">
+        <div class="form-group">
+          <label for="doctor-name" data-trans="full_name">To'liq ism-sharifi</label>
+          <input type="text" id="doctor-name" class="input-field" required placeholder="Masalan: Dr. Madina Karimova">
+        </div>
+        <div class="form-group">
+          <label for="doctor-spec" data-trans="specialization">Mutaxassisligi</label>
+          <input type="text" id="doctor-spec" class="input-field" required placeholder="Masalan: Nevropatolog">
+        </div>
+        <div class="form-group">
+          <label for="doctor-dept" data-trans="department">Bo'lim</label>
+          <select id="doctor-dept" class="input-field" required>
+            <option value="General Medicine">General Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Diagnostics">Diagnostics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="doctor-phone" data-trans="phone">Telefon raqami</label>
+          <input type="text" id="doctor-phone" class="input-field" required placeholder="+998 90 123-45-67">
+        </div>
+        <div class="form-group">
+          <label for="doctor-email" data-trans="email">Email manzili</label>
+          <input type="email" id="doctor-email" class="input-field" required placeholder="madina.karimova@medicore.uz">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('doctor-modal')" data-trans="btn_cancel">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" id="doctor-submit-btn" data-trans="btn_save">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Patient Modal -->
+  <div id="patient-modal" class="modal-overlay">
+    <div class="modal-content glass-panel">
+      <div class="panel-header">
+        <h3 id="patient-modal-title" data-trans="modal_add_patient">Bemor profilini yaratish</h3>
+        <button class="btn-icon" onclick="closeModal('patient-modal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="patient-form" onsubmit="handlePatientSubmit(event)">
+        <input type="hidden" id="patient-id">
+        <div class="form-group">
+          <label for="patient-name" data-trans="full_name">To'liq ism-sharifi</label>
+          <input type="text" id="patient-name" class="input-field" required placeholder="Jasur Aliev">
+        </div>
+        <div class="form-group">
+          <label for="patient-dob" data-trans="dob">Tug'ilgan sanasi</label>
+          <input type="date" id="patient-dob" class="input-field" required>
+        </div>
+        <div class="form-group">
+          <label for="patient-gender" data-trans="gender">Jinsi</label>
+          <select id="patient-gender" class="input-field" required>
+            <option value="male" data-trans="gender_male">Erkak</option>
+            <option value="female" data-trans="gender_female">Ayol</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="patient-phone" data-trans="phone">Telefon raqami</label>
+          <input type="text" id="patient-phone" class="input-field" required placeholder="+998 99 999-88-77">
+        </div>
+        <div class="form-group">
+          <label for="patient-address" data-trans="address">Yashash manzili</label>
+          <input type="text" id="patient-address" class="input-field" required placeholder="Toshkent sh., Yunusobod tumani">
+        </div>
+        <div class="form-group">
+          <label for="patient-doctor" data-trans="doctor">Biriktirilgan shifokor</label>
+          <select id="patient-doctor" class="input-field">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('patient-modal')" data-trans="btn_cancel">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" id="patient-submit-btn" data-trans="btn_save">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Illness / Diagnosis Modal -->
+  <div id="illness-modal" class="modal-overlay">
+    <div class="modal-content glass-panel">
+      <div class="panel-header">
+        <h3 id="illness-modal-title" data-trans="modal_add_illness">Kasallik/Tashxis yozish</h3>
+        <button class="btn-icon" onclick="closeModal('illness-modal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="illness-form" onsubmit="handleIllnessSubmit(event)">
+        <input type="hidden" id="illness-id">
+        <!-- Patient selection is only visible when creating global illness, hidden when adding directly from patient profile -->
+        <div class="form-group" id="illness-patient-group">
+          <label for="illness-patient" data-trans="nav_patients">Bemor</label>
+          <select id="illness-patient" class="input-field" required>
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="illness-icd" data-trans="icd_code">ICD-10 kodi</label>
+          <input type="text" id="illness-icd" class="input-field" required placeholder="Masalan: I10, E11, G43 (Autocomplete/Placeholder)">
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; display: flex; gap: 8px;">
+            <span>Masalan:</span>
+            <a href="#" onclick="setIcd('I10', 'Arterial Gipertenziya (Essential hypertension)'); return false;" style="color: var(--color-primary);">I10 (Gipertenziya)</a> |
+            <a href="#" onclick="setIcd('E11', 'Qandli diabet 2-tip (Type 2 diabetes)'); return false;" style="color: var(--color-primary);">E11 (Diabet)</a> |
+            <a href="#" onclick="setIcd('G43', 'Migren (Migraine without aura)'); return false;" style="color: var(--color-primary);">G43 (Migren)</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="illness-desc" data-trans="description">Kasallik tavsifi</label>
+          <input type="text" id="illness-desc" class="input-field" required placeholder="Masalan: Surunkali bosh og'rig'i, yuqori qon bosimi">
+        </div>
+        <div class="form-group">
+          <label for="illness-severity" data-trans="severity">Og'irlik darajasi</label>
+          <select id="illness-severity" class="input-field" required>
+            <option value="low" data-trans="severity_low">Past</option>
+            <option value="medium" data-trans="severity_medium">O'rta</option>
+            <option value="high" data-trans="severity_high">Yuqori</option>
+            <option value="critical" data-trans="severity_critical">Kritik</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="illness-date" data-trans="diagnosed_at">Tashxis qo'yilgan sana</label>
+          <input type="date" id="illness-date" class="input-field" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('illness-modal')" data-trans="btn_cancel">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" id="illness-submit-btn" data-trans="btn_save">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Logic Modules -->
+  <script type="module" src="/js/app.js"></script>
+
+  <!-- Global Modal Close Helper for compatibility with simple markup events -->
+  <script>
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+    function setIcd(code, desc) {
+      document.getElementById('illness-icd').value = code;
+      document.getElementById('illness-desc').value = desc;
+    }
+  </script>
+</body>
+</html>

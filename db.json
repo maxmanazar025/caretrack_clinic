@@ -1,0 +1,188 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@medicore.uz",
+      "password_hash": "$2a$10$rmLP5nPTeXmkS8FM.YAaCua/0lZWBvF49AqQWikFL3FtsbAp9Uglu",
+      "role": "admin",
+      "full_name": "Administrator MediCore",
+      "created_at": "2026-05-24T13:36:42.886Z"
+    },
+    {
+      "id": 2,
+      "email": "doctor@medicore.uz",
+      "password_hash": "$2a$10$fvtAKdjMOUA.v4df7lxtbuVmUa2Ca1kdK8V671pRY27yGngJzJ/vK",
+      "role": "clinician",
+      "full_name": "Dr. Madina Karimova",
+      "created_at": "2026-05-24T13:36:42.946Z"
+    },
+    {
+      "id": 3,
+      "email": "recept@medicore.uz",
+      "password_hash": "$2a$10$vegggjEmHFm02bl5EvX.A.SNu3d6dUpywQGsddPtj60eA.lp/peCa",
+      "role": "receptionist",
+      "full_name": "Zuhra Qobilova",
+      "created_at": "2026-05-24T13:36:43.005Z"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "full_name": "Dr. Shaxzod Alimov",
+      "specialization": "Kardiolog (Cardiologist)",
+      "department": "Cardiology",
+      "phone": "+998 90 123-45-67",
+      "email": "shaxzod.alimov@medicore.uz",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 2,
+      "full_name": "Dr. Madina Karimova",
+      "specialization": "Nevropatolog (Neurologist)",
+      "department": "Neurology",
+      "phone": "+998 91 987-65-43",
+      "email": "doctor@medicore.uz",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 3,
+      "full_name": "Dr. Rustam Yusupov",
+      "specialization": "Dermatolog (Dermatologist)",
+      "department": "Dermatology",
+      "phone": "+998 93 111-22-33",
+      "email": "rustam.yusupov@medicore.uz",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 4,
+      "full_name": "Dr. Elena Petrova",
+      "specialization": "Ortoped (Orthopedist)",
+      "department": "Orthopedics",
+      "phone": "+998 94 444-55-66",
+      "email": "elena.petrova@medicore.uz",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 5,
+      "full_name": "Dr. Sardor Olimov",
+      "specialization": "Terapevt (General Practitioner)",
+      "department": "General Medicine",
+      "phone": "+998 95 555-66-77",
+      "email": "sardor.olimov@medicore.uz",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "full_name": "Jasur Aliev",
+      "date_of_birth": "1990-05-12",
+      "gender": "male",
+      "phone": "+998 99 999-88-77",
+      "address": "Toshkent sh., Yunusobod tumani, 4-daha",
+      "doctor_id": 1,
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 2,
+      "full_name": "Nilufar Umarova",
+      "date_of_birth": "1985-08-22",
+      "gender": "female",
+      "phone": "+998 97 777-66-55",
+      "address": "Toshkent sh., Chilonzor tumani, Lutfiy ko'chasi",
+      "doctor_id": 2,
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 3,
+      "full_name": "Bekzod Rustamov",
+      "date_of_birth": "1999-12-01",
+      "gender": "male",
+      "phone": "+998 90 222-33-44",
+      "address": "Samarqand sh., Dahbed ko'chasi, 12-uy",
+      "doctor_id": 5,
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 4,
+      "full_name": "Maxmanazar Sultonov",
+      "date_of_birth": "2007-10-30",
+      "gender": "male",
+      "phone": "+998976353828",
+      "address": "Toshkent sh. Zangiota t",
+      "doctor_id": 1,
+      "created_at": "2026-05-24T13:43:42.669Z",
+      "updated_at": "2026-05-24T13:43:42.669Z"
+    }
+  ],
+  "illnesses": [
+    {
+      "id": 1,
+      "icd_code": "I10",
+      "description": "Arterial Gipertenziya (Essential hypertension)",
+      "severity": "medium",
+      "patient_id": 1,
+      "diagnosed_at": "2026-01-15",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 2,
+      "icd_code": "E11",
+      "description": "Qandli diabet 2-tip (Type 2 diabetes mellitus)",
+      "severity": "medium",
+      "patient_id": 1,
+      "diagnosed_at": "2026-03-10",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 3,
+      "icd_code": "G43",
+      "description": "Migren (Migraine without aura)",
+      "severity": "high",
+      "patient_id": 2,
+      "diagnosed_at": "2026-02-20",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 4,
+      "icd_code": "J06.9",
+      "description": "O'tkir yuqori nafas yo'llari infeksiyasi (Acute upper respiratory infection, unspecified)",
+      "severity": "low",
+      "patient_id": 3,
+      "diagnosed_at": "2026-05-18",
+      "created_at": "2026-05-24T13:36:43.005Z",
+      "updated_at": "2026-05-24T13:36:43.005Z"
+    },
+    {
+      "id": 5,
+      "icd_code": "i11",
+      "description": "Bosh og'rig'i",
+      "severity": "low",
+      "patient_id": 4,
+      "diagnosed_at": "2026-05-24",
+      "created_at": "2026-05-24T13:44:59.573Z",
+      "updated_at": "2026-05-24T17:10:34.309Z"
+    },
+    {
+      "id": 6,
+      "icd_code": "e11",
+      "description": "Bosh og'rig'i",
+      "severity": "critical",
+      "patient_id": 4,
+      "diagnosed_at": "2026-05-24",
+      "created_at": "2026-05-24T16:22:02.490Z",
+      "updated_at": "2026-05-24T16:22:02.490Z"
+    }
+  ]
+}
